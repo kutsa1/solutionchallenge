@@ -26,7 +26,7 @@ import java.util.List;
 
 public class Student extends User {
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user")
     @JsonIgnore
     private List<Homework> homeworks = new ArrayList<>();
 
