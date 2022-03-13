@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ICommentDao extends JpaRepository<Comment, Integer> {
 
-    List<Comment> findById(int commentId);
+    Comment findById(int commentId);
 }

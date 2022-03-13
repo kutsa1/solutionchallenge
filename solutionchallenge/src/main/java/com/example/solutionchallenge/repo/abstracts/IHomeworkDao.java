@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface IHomeworkDao extends JpaRepository<Homework, Integer> {
 
-    List<Homework> findById(int homeworkId);
+    Homework findById(int homeworkId);
 }
