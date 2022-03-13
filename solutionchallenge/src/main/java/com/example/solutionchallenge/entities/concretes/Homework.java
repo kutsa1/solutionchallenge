@@ -1,5 +1,6 @@
 package com.example.solutionchallenge.entities.concretes;
 
+import com.example.solutionchallenge.core.entities.IEntity;
 import com.example.solutionchallenge.core.entities.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -21,7 +22,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "homeworks")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Homework {
+public class Homework implements IEntity {
 
     @OneToMany(mappedBy = "homework")
     @JsonIgnore

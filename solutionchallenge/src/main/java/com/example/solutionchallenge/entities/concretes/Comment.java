@@ -2,6 +2,7 @@ package com.example.solutionchallenge.entities.concretes;
 
 
 
+import com.example.solutionchallenge.core.entities.IEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -16,7 +17,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Table(name = "comments")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Comment {
+public class Comment implements IEntity {
 
 
     @Id
