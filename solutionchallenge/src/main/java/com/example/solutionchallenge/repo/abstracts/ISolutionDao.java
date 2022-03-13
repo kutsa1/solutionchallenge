@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ISolutionDao extends JpaRepository<Solution, Integer> {
 
-    List<Solution> findById(int solutionId);
+    Solution findById(int solutionId);
 }
