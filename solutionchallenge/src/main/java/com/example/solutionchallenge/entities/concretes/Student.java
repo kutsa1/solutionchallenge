@@ -1,6 +1,6 @@
 package com.example.solutionchallenge.entities.concretes;
 
-import com.example.solutionchallenge.core.entities.User;
+import com.example.solutionchallenge.entities.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -29,6 +29,10 @@ public class Student extends User {
     @OneToMany(mappedBy = "user")
     @JsonIgnore
     private List<Homework> homeworks = new ArrayList<>();
+
+    @ManyToOne
+    @JsonIgnore
+    private Homework homework;
 
     @NotNull
     @NotBlank
