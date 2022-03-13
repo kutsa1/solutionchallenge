@@ -1,5 +1,6 @@
 package com.example.solutionchallenge.entities.concretes;
 
+import com.example.solutionchallenge.core.entities.IEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -20,7 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Solution {
+public class Solution implements IEntity {
 
     @ManyToOne
     @JsonIgnore
