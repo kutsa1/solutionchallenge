@@ -1,6 +1,6 @@
 package com.example.solutionchallenge.core.api;
 
-import com.example.solutionchallenge.core.entities.IEntity;
+import com.example.solutionchallenge.entities.IEntity;
 import com.example.solutionchallenge.core.utilities.business.IServiceBase;
 import com.example.solutionchallenge.core.utilities.results.ErrorResult;
 import lombok.RequiredArgsConstructor;

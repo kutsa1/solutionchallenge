@@ -6,4 +6,5 @@ import com.example.solutionchallenge.entities.concretes.Comment;
 
 public interface ICommentService extends IServiceBase<Comment> {
     IResult addCommentToHomework (int commentId, int homeworkId);
+    IResult addCommentToUser(int commentId, int userId);
 }

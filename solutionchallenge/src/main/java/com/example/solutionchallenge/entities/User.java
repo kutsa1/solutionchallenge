@@ -1,4 +1,4 @@
-package com.example.solutionchallenge.core.entities;
+package com.example.solutionchallenge.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;

@@ -5,5 +5,6 @@ import com.example.solutionchallenge.core.utilities.results.IResult;
 import com.example.solutionchallenge.entities.concretes.Homework;
 
 public interface IHomeworkService extends IServiceBase<Homework> {
-    IResult addReportToUser(int reportId, int userId);
+    IResult addHomeworkToUser(int reportId, int userId);
+    IResult existsById(int homeworkId);
 }
