@@ -7,4 +7,5 @@ import com.example.solutionchallenge.entities.concretes.Homework;
 public interface IHomeworkService extends IServiceBase<Homework> {
     IResult addHomeworkToUser(int homeworkId, int userId);
 
+
 }

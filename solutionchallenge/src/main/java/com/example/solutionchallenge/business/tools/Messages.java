@@ -32,4 +32,8 @@ public final class Messages {
     public static String soluitonListed = "Solution is listed by id";
     public static String solutionNotFound = "Soluiton is not found";
     public static String solutionFound = "Soluiton is found";
+    public static String studentAdd = "Student is added.";
+    public static String studentUpdate = "Student is update";
+    public static String studentDelete = "Student is deleted";
+    public static String studentListed = "Students are listed";
 }
