@@ -26,13 +26,10 @@ import java.util.List;
 
 public class Student extends User {
 
-    @OneToMany(mappedBy = "user")
+    @ManyToMany
     @JsonIgnore
     private List<Homework> homeworks = new ArrayList<>();
 
-    @ManyToOne
-    @JsonIgnore
-    private Homework homework;
 
     @NotNull
     @NotBlank

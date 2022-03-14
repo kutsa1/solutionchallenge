@@ -44,4 +44,5 @@ public final class Messages {
     public static String userUpdate = "User is update.";
     public static String usernameAlreadyInUse = "Username is already in use";
     public static String emailAlreadyInUse = "Email is alerady in use";
+    public static String imageUploadError = "İmage Upload Error";
 }

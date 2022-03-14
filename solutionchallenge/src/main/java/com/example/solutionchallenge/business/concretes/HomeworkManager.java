@@ -22,15 +22,16 @@ public class HomeworkManager implements IHomeworkService {
 
     @Override
     public IResult addHomeworkToUser(int homeworkId, int userId) {
-        var result = BusinessRule.run(isHomeworkExistById(homeworkId),isHomeworkExistById(homeworkId));
+      //  var result = BusinessRule.run(isHomeworkExistById(homeworkId),isHomeworkExistById(homeworkId));
 
-        if (result!=null)
-            return result;
-        var homework = iHomeworkDao.getById(homeworkId);
-        var user = iUserService.getById(userId);
-        homework.setUser(user.getData());
-        iHomeworkDao.save(homework);
-        return new SuccessResult(Messages.homeworkAddedToUser);
+//        if (result!=null)
+  //          return result;
+    //    var homework = iHomeworkDao.getById(homeworkId);
+      //  var user = iUserService.getById(userId);
+        //homework.setUser(user.getData());
+        //iHomeworkDao.save(homework);
+      //  return new SuccessResult(Messages.homeworkAddedToUser);
+        return null;
     }
 
     @Override
