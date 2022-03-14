@@ -32,13 +32,10 @@ public class Homework implements IEntity {
     @JsonIgnore
     private List<Comment> comments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "homework")
+    @ManyToMany(mappedBy = "homeworks")
     @JsonIgnore
     private List<Student> students = new ArrayList<>();
 
-    @ManyToOne
-    @JsonIgnore
-    private User user;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

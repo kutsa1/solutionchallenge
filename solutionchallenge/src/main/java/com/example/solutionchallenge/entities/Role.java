@@ -1,5 +1,6 @@
 package com.example.solutionchallenge.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,6 +9,7 @@ import javax.validation.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name = "roles")
@@ -25,4 +27,8 @@ public class Role implements IEntity {
     @NotBlank
     @Column(unique = true)
     private String name;
+
+    @ManyToMany
+            @JsonIgnore
+    List<User> users;
 }
