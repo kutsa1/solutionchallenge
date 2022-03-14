@@ -36,4 +36,12 @@ public final class Messages {
     public static String studentUpdate = "Student is update";
     public static String studentDelete = "Student is deleted";
     public static String studentListed = "Students are listed";
+    public static String userAlreadyHasRole = "User already has role";
+    public static String roleAddedToUser = "role is added to user";
+    public static String userDelete = "User is deleted";
+    public static String userListed = "User is listed";
+    public static String userSave = "User is saved successfuly";
+    public static String userUpdate = "User is update.";
+    public static String usernameAlreadyInUse = "Username is already in use";
+    public static String emailAlreadyInUse = "Email is alerady in use";
 }
