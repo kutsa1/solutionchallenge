@@ -99,10 +99,10 @@ public class CommentManager implements ICommentService {
     }
 
     private IResult isHomeworkExistById(int homeworkId){
+    var result = iHomeworkService.getById(homeworkId);
+    if (result.getData()==null)
+        return new ErrorResult(Messages.homeworkNotFound);
+    return new SuccessResult();
 
-        var result = iHomeworkService.existsById(homeworkId);
-        if (!result.isSuccess())
-            return new ErrorResult(Messages.homeworkNotFound);
-        return new SuccessResult();
     }
 }
