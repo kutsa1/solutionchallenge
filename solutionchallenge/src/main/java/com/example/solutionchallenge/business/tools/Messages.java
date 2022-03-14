@@ -25,4 +25,11 @@ public final class Messages {
     public static String roleUpdated = "Role is updated.";
     public static String roleDeleted ="Role is deleted.";
     public static String roleListed = "Role is listed.";
+    public static String solutionsListed = "Solutions are listed";
+    public static String solutionAdd = "Solution is added.";
+    public static String solutionUpdate ="Solution is updated.";
+    public static String solutionDelete = "Solution is deleted";
+    public static String soluitonListed = "Solution is listed by id";
+    public static String solutionNotFound = "Soluiton is not found";
+    public static String solutionFound = "Soluiton is found";
 }
