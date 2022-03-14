@@ -51,4 +51,21 @@ public class SolutionManager implements ISolutionService {
         return new ErrorResult(Messages.solutionNotFound);
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
