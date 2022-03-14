@@ -17,6 +17,12 @@ public final class Messages {
     public static String homeworkListed = "Homeworks are listed.";
     public static String homeworkSave = "Homework is saved.";
     public static String homeworkUpdate = "Homework is updated.";
-    public static String homeworkDelete = "Homework is deleted";
-    public static String homeworkAddedToUser ="Homework is added to user";
+    public static String homeworkDelete = "Homework is deleted.";
+    public static String homeworkAddedToUser ="Homework is added to user.";
+    public static String roleNotFound ="There is no role like this.";
+    public static String roleNameAlreadyExist = "Role name is already exist.";
+    public static String roleAdded ="Role is added.";
+    public static String roleUpdated = "Role is updated.";
+    public static String roleDeleted ="Role is deleted.";
+    public static String roleListed = "Role is listed.";
 }
