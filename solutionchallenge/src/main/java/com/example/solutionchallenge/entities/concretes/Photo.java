@@ -27,6 +27,7 @@ public class Photo  implements IEntity {
     private String imgUrl;
 
     @ManyToOne
+    @JoinColumn(name = "solution_id")
     @JsonIgnore
     private Solution solution;
 
