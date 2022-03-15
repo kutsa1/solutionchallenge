@@ -44,5 +44,13 @@ public final class Messages {
     public static String userUpdate = "User is update.";
     public static String usernameAlreadyInUse = "Username is already in use";
     public static String emailAlreadyInUse = "Email is alerady in use";
-    public static String imageUploadError = "İmage Upload Error";
+    public static String imageUploadError = "Image Upload Error";
+    public static String imageCanNotBeNull = "Image can not be null";
+    public static String imageSizeUnValid = "Image size bigger than should be";
+    public static String photoSaved = "Image is saved by succesfuly";
+    public static String photoListed = "Images are listed";
+    public static String photoUpdate = "Image is updated";
+    public static String photoDeleted = "Image is deleted";
+    public static String photoNotFound = "Image can not found";
+    public static String photoAddedToSolution = "Photo is added the solution By KUTSAL GÜRLEK";
 }

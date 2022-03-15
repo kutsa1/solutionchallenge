@@ -27,7 +27,6 @@ import java.util.List;
 public class Student extends User {
 
     @ManyToMany
-    @JsonIgnore
     private List<Homework> homeworks = new ArrayList<>();
 
 

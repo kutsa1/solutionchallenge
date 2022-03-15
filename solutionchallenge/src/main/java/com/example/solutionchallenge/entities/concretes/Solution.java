@@ -31,6 +31,10 @@ public class Solution implements IEntity {
     @JsonIgnore
     private List<Comment> comments = new ArrayList<>();
 
+    @OneToMany
+    @JsonIgnore
+    private List<Photo> photos = new ArrayList<>();
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

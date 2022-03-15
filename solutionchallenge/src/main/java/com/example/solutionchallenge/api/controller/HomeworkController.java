@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HomeworkController extends ControllerBase<Homework, IHomeworkService> {
 
-    IHomeworkService iHomeworkService;
+    private final IHomeworkService iHomeworkService;
 
     public HomeworkController(IHomeworkService iHomeworkService){
         super(iHomeworkService);
@@ -23,7 +23,7 @@ public class HomeworkController extends ControllerBase<Homework, IHomeworkServic
     }
 
     @PostMapping("/addhomeworktouser")
-    ResponseEntity<?> addHomeworkToUser(@RequestParam int homeworkId, int userId){
+    ResponseEntity<?> addHomeworkToUser(@RequestParam int homeworkId, @RequestParam  int userId){
         var result = iHomeworkService.addHomeworkToUser(homeworkId, userId);
         if (result.isSuccess()){
             return new ResponseEntity<>(result, HttpStatus.OK);

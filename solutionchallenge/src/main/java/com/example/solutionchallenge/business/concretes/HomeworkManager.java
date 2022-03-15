@@ -1,11 +1,13 @@
 package com.example.solutionchallenge.business.concretes;
 
 import com.example.solutionchallenge.business.abstracts.IHomeworkService;
+import com.example.solutionchallenge.business.abstracts.IStudentService;
 import com.example.solutionchallenge.business.abstracts.IUserService;
 import com.example.solutionchallenge.business.tools.Messages;
 import com.example.solutionchallenge.core.utilities.business.BusinessRule;
 import com.example.solutionchallenge.core.utilities.results.*;
 import com.example.solutionchallenge.entities.concretes.Homework;
+import com.example.solutionchallenge.entities.concretes.Student;
 import com.example.solutionchallenge.repo.abstracts.IHomeworkDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,21 +19,20 @@ import java.util.List;
 @RequiredArgsConstructor
 public class HomeworkManager implements IHomeworkService {
     private final IHomeworkDao iHomeworkDao;
-    IUserService iUserService;
+    private final IStudentService iStudentService;
 
 
     @Override
-    public IResult addHomeworkToUser(int homeworkId, int userId) {
-      //  var result = BusinessRule.run(isHomeworkExistById(homeworkId),isHomeworkExistById(homeworkId));
+    public IResult addHomeworkToUser(int homeworkId, int studentId) {
+        var result = BusinessRule.run(isHomeworkExistById(homeworkId), isHomeworkExistById(homeworkId));
+        if (result != null)
+            return result;
+        Homework homework = this.iHomeworkDao.findById(homeworkId);
+        Student student = this.iStudentService.getById(studentId).getData();
+        student.getHomeworks().add(homework);
+        iStudentService.update(student);
+        return new SuccessResult(Messages.homeworkAddedToUser);
 
-//        if (result!=null)
-  //          return result;
-    //    var homework = iHomeworkDao.getById(homeworkId);
-      //  var user = iUserService.getById(userId);
-        //homework.setUser(user.getData());
-        //iHomeworkDao.save(homework);
-      //  return new SuccessResult(Messages.homeworkAddedToUser);
-        return null;
     }
 
     @Override
@@ -65,7 +66,7 @@ public class HomeworkManager implements IHomeworkService {
         return new ErrorDataResult<>(null);
     }
 
-    private IResult isHomeworkExistById(int homeworkId){
+    private IResult isHomeworkExistById(int homeworkId) {
         var result = iHomeworkDao.existsById(homeworkId);
         if (!result)
             return new ErrorResult(Messages.homeworkNotFound);
