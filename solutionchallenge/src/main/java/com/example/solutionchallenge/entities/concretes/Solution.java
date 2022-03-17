@@ -24,10 +24,11 @@ import java.util.List;
 public class Solution implements IEntity {
 
     @ManyToOne
-    @JsonIgnore
+    @JoinColumn(name = "homework_id")
     private Homework homework;
 
     @ManyToOne
+    @JoinColumn(name = "student_id")
     private Student student;
 
     @OneToMany(mappedBy = "solution")

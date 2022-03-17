@@ -27,18 +27,15 @@ public class Comment implements IEntity {
     private int id;
 
     @ManyToOne
-    @JsonIgnore
     private User user;
 
     private boolean status = true;
     private LocalDateTime date = LocalDateTime.now();
 
     @ManyToOne
-    @JsonIgnore
     private Solution solution;
 
     @ManyToOne
-    @JsonIgnore
     private Homework homework;
 
 

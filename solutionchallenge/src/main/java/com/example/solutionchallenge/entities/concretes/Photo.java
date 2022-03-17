@@ -28,7 +28,6 @@ public class Photo  implements IEntity {
 
     @ManyToOne
     @JoinColumn(name = "solution_id")
-    @JsonIgnore
     private Solution solution;
 
 
