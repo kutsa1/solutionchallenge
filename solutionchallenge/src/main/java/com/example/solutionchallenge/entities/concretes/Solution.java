@@ -35,7 +35,7 @@ public class Solution implements IEntity {
     @JsonIgnore
     private List<Comment> comments = new ArrayList<>();
 
-    @OneToMany
+    @OneToMany(mappedBy = "solution")
     @JsonIgnore
     private List<Photo> photos = new ArrayList<>();
 
