@@ -29,6 +29,10 @@ public class Student extends User {
     @ManyToMany
     private List<Homework> homeworks = new ArrayList<>();
 
+    @OneToMany(mappedBy = "student")
+    @JsonIgnore
+    private List<Solution> solutions = new ArrayList<>();
+
 
     @NotNull
     @NotBlank
