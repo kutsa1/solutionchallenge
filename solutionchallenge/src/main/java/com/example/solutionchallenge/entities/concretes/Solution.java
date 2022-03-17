@@ -27,6 +27,9 @@ public class Solution implements IEntity {
     @JsonIgnore
     private Homework homework;
 
+    @ManyToOne
+    private Student student;
+
     @OneToMany(mappedBy = "solution")
     @JsonIgnore
     private List<Comment> comments = new ArrayList<>();
