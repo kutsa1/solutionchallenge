@@ -20,7 +20,7 @@ public class PhotoController extends ControllerBase<Photo, IPhotoService> {
     }
 
     @PostMapping("/addimage")
-    public ResponseEntity<?> addImage(@RequestBody MultipartFile image){
+    public ResponseEntity<?> addImage(@RequestPart MultipartFile image){
         var result = iPhotoService.addImage(image);
         if (result.isSuccess()){
             return new ResponseEntity<>(result, HttpStatus.OK);
