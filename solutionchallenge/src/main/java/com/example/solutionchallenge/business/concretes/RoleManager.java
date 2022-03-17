@@ -4,7 +4,7 @@ import com.example.solutionchallenge.business.abstracts.IRoleService;
 import com.example.solutionchallenge.business.tools.Messages;
 import com.example.solutionchallenge.core.utilities.business.BusinessRule;
 import com.example.solutionchallenge.core.utilities.results.*;
-import com.example.solutionchallenge.entities.Role;
+import com.example.solutionchallenge.core.entities.Role;
 import com.example.solutionchallenge.repo.abstracts.IRoleDao;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

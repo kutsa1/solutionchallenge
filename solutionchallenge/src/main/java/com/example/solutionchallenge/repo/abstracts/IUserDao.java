@@ -1,6 +1,6 @@
 package com.example.solutionchallenge.repo.abstracts;
 
-import com.example.solutionchallenge.entities.User;
+import com.example.solutionchallenge.core.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IUserDao extends JpaRepository<User, Integer> {

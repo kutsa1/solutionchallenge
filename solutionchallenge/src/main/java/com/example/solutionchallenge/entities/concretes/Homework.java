@@ -1,7 +1,6 @@
 package com.example.solutionchallenge.entities.concretes;
 
-import com.example.solutionchallenge.entities.IEntity;
-import com.example.solutionchallenge.entities.User;
+import com.example.solutionchallenge.core.entities.IEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;

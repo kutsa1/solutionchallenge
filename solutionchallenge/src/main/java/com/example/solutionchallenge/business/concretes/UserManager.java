@@ -5,8 +5,8 @@ import com.example.solutionchallenge.business.abstracts.IUserService;
 import com.example.solutionchallenge.business.tools.Messages;
 import com.example.solutionchallenge.core.utilities.business.BusinessRule;
 import com.example.solutionchallenge.core.utilities.results.*;
-import com.example.solutionchallenge.entities.Role;
-import com.example.solutionchallenge.entities.User;
+import com.example.solutionchallenge.core.entities.Role;
+import com.example.solutionchallenge.core.entities.User;
 import com.example.solutionchallenge.repo.abstracts.IUserDao;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service

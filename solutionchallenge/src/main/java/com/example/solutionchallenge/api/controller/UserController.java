@@ -2,7 +2,7 @@ package com.example.solutionchallenge.api.controller;
 
 import com.example.solutionchallenge.business.abstracts.IUserService;
 import com.example.solutionchallenge.core.api.ControllerBase;
-import com.example.solutionchallenge.entities.User;
+import com.example.solutionchallenge.core.entities.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

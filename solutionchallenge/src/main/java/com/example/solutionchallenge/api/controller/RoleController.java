@@ -2,7 +2,7 @@ package com.example.solutionchallenge.api.controller;
 
 import com.example.solutionchallenge.business.abstracts.IRoleService;
 import com.example.solutionchallenge.core.api.ControllerBase;
-import com.example.solutionchallenge.entities.Role;
+import com.example.solutionchallenge.core.entities.Role;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

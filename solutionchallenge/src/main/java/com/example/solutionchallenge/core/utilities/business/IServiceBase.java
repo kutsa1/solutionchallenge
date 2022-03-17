@@ -1,6 +1,6 @@
 package com.example.solutionchallenge.core.utilities.business;
 
-import com.example.solutionchallenge.entities.IEntity;
+import com.example.solutionchallenge.core.entities.IEntity;
 import com.example.solutionchallenge.core.utilities.results.DataResult;
 import com.example.solutionchallenge.core.utilities.results.IResult;
 
