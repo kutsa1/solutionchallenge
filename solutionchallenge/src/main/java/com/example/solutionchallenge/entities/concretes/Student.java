@@ -29,6 +29,9 @@ public class Student extends User {
     @ManyToMany
     private List<Homework> homeworks = new ArrayList<>();
 
+    @
+    private List<Solution> solutions = new ArrayList<>();
+
 
     @NotNull
     @NotBlank
