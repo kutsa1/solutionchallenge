@@ -24,7 +24,7 @@ UserController extends ControllerBase<User,IUserService> {
 
 
     @PostMapping("/addroletouser")
-    public ResponseEntity<?> addRoleToUser(@RequestParam String username, String roleName) {
+    public ResponseEntity<?> addRoleToUser(@RequestParam String username, @RequestParam String roleName) {
         var result = iUserService.addRoleToUser(username, roleName);
         if (result.isSuccess())
             return new ResponseEntity<>(result, HttpStatus.OK);
