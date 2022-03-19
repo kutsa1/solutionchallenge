@@ -11,19 +11,42 @@ import com.example.solutionchallenge.repo.abstracts.IUserDao;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class UserManager implements IUserService {
-private final IUserDao iUserDao;
+public class UserManager implements IUserService, UserDetailsService {
+    private final IUserDao iUserDao;
     private final IRoleService iRoleService;
     private final PasswordEncoder passwordEncoder;
 
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = iUserDao.findByUsername(username);
+        if (user == null) {
+            log.error("user not found in the database");
+            throw new UsernameNotFoundException("user not found in the database");
+
+        } else
+            log.info("user found in the database: {}", username);
+
+        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        user.getRoles().forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getName())));
+
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
+
+    }
 
 
     @Override
@@ -81,6 +104,7 @@ private final IUserDao iUserDao;
         User user = iUserDao.findByUsername(username);
         Role role = iRoleService.findByName(roleName).getData();
         user.getRoles().add(role);
+        iUserDao.save(user);
         return new SuccessResult(Messages.roleAddedToUser);
     }
 
@@ -175,5 +199,6 @@ private final IUserDao iUserDao;
             return new ErrorResult(Messages.emailAlreadyInUse);
         return new SuccessResult();
     }
+
 
 }
