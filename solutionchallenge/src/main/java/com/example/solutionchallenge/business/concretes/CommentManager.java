@@ -2,6 +2,7 @@ package com.example.solutionchallenge.business.concretes;
 
 import com.example.solutionchallenge.business.abstracts.ICommentService;
 import com.example.solutionchallenge.business.abstracts.IHomeworkService;
+import com.example.solutionchallenge.business.abstracts.ISolutionService;
 import com.example.solutionchallenge.business.abstracts.IUserService;
 import com.example.solutionchallenge.business.tools.Messages;
 import com.example.solutionchallenge.core.utilities.business.BusinessRule;
@@ -20,22 +21,37 @@ public class CommentManager implements ICommentService {
     private final ICommentDao iCommentDao;
     private final IUserService iUserService;
     private final IHomeworkService iHomeworkService;
-
+    private final ISolutionService iSolutionService;
 
     @Override
-    public IResult addCommentToHomework(int commentId, int homeworkId) {
-        var result = BusinessRule.run(isCommentExistById(commentId), isHomeworkExistById(homeworkId));
+    public IResult addCommentToSolution(int commentId, int solutionId){
+        var result = BusinessRule.run(isCommentExistById(commentId), isSoluitonExistById(solutionId));
 
         if (result != null)
             return result;
         var comment = iCommentDao.getById(commentId);
-        var homework = iHomeworkService.getById(homeworkId);
+        var solution = iSolutionService.getById(solutionId);
 
-        comment.setHomework(homework.getData());
-
+        comment.setSolution(solution.getData());
         iCommentDao.save(comment);
         return new SuccessResult();
     }
+
+
+//    @Override
+//    public IResult addCommentToHomework(int commentId, int homeworkId) {
+//        var result = BusinessRule.run(isCommentExistById(commentId), isHomeworkExistById(homeworkId));
+//
+//        if (result != null)
+//            return result;
+//        var comment = iCommentDao.getById(commentId);
+//        var homework = iHomeworkService.getById(homeworkId);
+//
+//        comment.setHomework(homework.getData());
+//
+//        iCommentDao.save(comment);
+//        return new SuccessResult();
+//    }
 
     @Override
     public IResult addCommentToUser(int commentId, int userId) {
@@ -104,5 +120,12 @@ public class CommentManager implements ICommentService {
         return new ErrorResult(Messages.homeworkNotFound);
     return new SuccessResult();
 
+    }
+
+    private IResult isSoluitonExistById(int soluitonId){
+        var result = iSolutionService.getById(soluitonId);
+        if (result.getData()==null)
+            return new ErrorResult(Messages.solutionNotFound);
+        return new SuccessResult();
     }
 }
