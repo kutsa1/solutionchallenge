@@ -5,6 +5,7 @@ import com.example.solutionchallenge.core.utilities.results.IResult;
 import com.example.solutionchallenge.entities.concretes.Comment;
 
 public interface ICommentService extends IServiceBase<Comment> {
-    IResult addCommentToHomework (int commentId, int homeworkId);
+   // IResult addCommentToHomework (int commentId, int homeworkId);
     IResult addCommentToUser(int commentId, int userId);
+    IResult addCommentToSolution(int commentId, int solutionId);
 }

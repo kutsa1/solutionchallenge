@@ -34,6 +34,8 @@ public class Comment implements IEntity {
     private LocalDateTime date = LocalDateTime.now();
 
     @ManyToOne
+    @NotBlank
+    @NotNull
     private Solution solution;
 
     @ManyToOne
