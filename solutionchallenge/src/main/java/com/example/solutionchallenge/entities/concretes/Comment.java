@@ -10,6 +10,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
@@ -36,6 +38,10 @@ public class Comment implements IEntity {
 
     @ManyToOne
     private Homework homework;
+
+    @NotNull
+    @NotBlank
+    private String text;
 
 
 }
