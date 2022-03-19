@@ -8,4 +8,7 @@ import java.util.List;
 public interface IStudentDao extends JpaRepository<Student, Integer> {
     List<Student> findByName(String studentName);
     Student findById(int studentId);
+
+    boolean existsByUsername(String username);
+    boolean existsByEmail(String email);
 }

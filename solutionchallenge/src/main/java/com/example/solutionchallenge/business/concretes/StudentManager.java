@@ -2,10 +2,8 @@ package com.example.solutionchallenge.business.concretes;
 
 import com.example.solutionchallenge.business.abstracts.IStudentService;
 import com.example.solutionchallenge.business.tools.Messages;
-import com.example.solutionchallenge.core.utilities.results.DataResult;
-import com.example.solutionchallenge.core.utilities.results.IResult;
-import com.example.solutionchallenge.core.utilities.results.SuccesDataResult;
-import com.example.solutionchallenge.core.utilities.results.SuccessResult;
+import com.example.solutionchallenge.core.utilities.business.BusinessRule;
+import com.example.solutionchallenge.core.utilities.results.*;
 import com.example.solutionchallenge.entities.concretes.Student;
 import com.example.solutionchallenge.repo.abstracts.IStudentDao;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +24,13 @@ public class StudentManager implements IStudentService {
 
     @Override
     public IResult add(Student student) {
+        var result = BusinessRule.run(
+                ifExistByUsername(student.getUsername()),
+                ifExistByEmail(student.getEmail())
+        );
+        if (result != null)
+            return result;
+
         iStudentDao.save(student);
         return new SuccessResult(Messages.studentAdd);
     }
@@ -51,5 +56,18 @@ public class StudentManager implements IStudentService {
     @Override
     public IResult existById(int studentId) {
         return null;
+    }
+
+    private IResult ifExistByUsername(String username){
+        if (iStudentDao.existsByUsername(username))
+            return new ErrorResult(Messages.usernameAlreadyInUse);
+
+        return new SuccessResult();
+    }
+
+    private IResult ifExistByEmail(String email){
+        if (iStudentDao.existsByEmail(email))
+            return new ErrorResult(Messages.emailAlreadyInUse);
+        return new SuccessResult();
     }
 }
