@@ -35,13 +35,6 @@ public class SolutionchallengeApplication {
 //            userService.addRoleToUser("kutsa1", "admin");
 //        };
 //    }
-
-    @Bean
-    CommandLineRunner run(IUserService userService) {
-        return args -> {
-            userService.addRoleToUser("isoo", "admin");
-            userService.addRoleToUser("kutsa1", "admin");
-        };
-    }
+    
 
 }
