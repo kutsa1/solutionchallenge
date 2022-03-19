@@ -27,6 +27,7 @@ public class Comment implements IEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+
     @ManyToOne
     private User user;
 
