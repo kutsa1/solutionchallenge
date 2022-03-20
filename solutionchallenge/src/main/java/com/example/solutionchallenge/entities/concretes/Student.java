@@ -45,11 +45,5 @@ public class Student extends User {
     @Size(min = 2)
     private String lastName;
 
-    @NotNull
-    @NotBlank
-    private String gender;
-
-    @DateTimeFormat(pattern = "dd.MM.yyyy")
-    private Date birthDay;
 
 }

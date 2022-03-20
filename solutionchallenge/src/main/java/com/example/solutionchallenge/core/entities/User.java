@@ -43,8 +43,8 @@ public class User implements IEntity {
 
 
     @NotNull
-    private boolean status;
+    private boolean status = true;
 
-    @ManyToMany(mappedBy = "users",fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles = new ArrayList<>();
 }
