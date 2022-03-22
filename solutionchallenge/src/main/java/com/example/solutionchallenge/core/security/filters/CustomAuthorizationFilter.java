@@ -32,6 +32,7 @@ import static org.springframework.http.MediaType.sortBySpecificity;
 
 @Slf4j
 public class CustomAuthorizationFilter extends OncePerRequestFilter {
+    private final String SECRET_KEY = "mysupermuperdupersecretkey";
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         if (request.getServletPath().equals("/api/login")) {
@@ -41,7 +42,7 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
             if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
                 try {
                     String token = authorizationHeader.substring("Bearer ".length());
-                    Algorithm algorithm = Algorithm.HMAC256("mysecret".getBytes(StandardCharsets.UTF_8));
+                    Algorithm algorithm = Algorithm.HMAC256(SECRET_KEY.getBytes(StandardCharsets.UTF_8));
                     JWTVerifier verifier = JWT.require(algorithm).build();
                     DecodedJWT decodedJWT = verifier.verify(token);
                     String username = decodedJWT.getSubject();
