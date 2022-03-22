@@ -194,11 +194,18 @@ public class UserManager implements IUserService, UserDetailsService {
     }
 
     private IResult isUpdateableWithEmail(String email, int id) {
+        
         var result = iUserDao.findByEmailAndIdNot(email, id);
         if (result != null)
             return new ErrorResult(Messages.emailAlreadyInUse);
         return new SuccessResult();
+
+
     }
 
 
+
+
 }
+
+

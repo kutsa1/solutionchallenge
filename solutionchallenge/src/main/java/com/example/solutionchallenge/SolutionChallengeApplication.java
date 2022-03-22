@@ -9,10 +9,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
-public class SolutionchallengeApplication {
+public class SolutionChallengeApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SolutionchallengeApplication.class, args);
+        SpringApplication.run(SolutionChallengeApplication.class, args);
 
     }
 

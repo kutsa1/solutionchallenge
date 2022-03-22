@@ -2,7 +2,6 @@ package com.example.solutionchallenge.business.concretes;
 
 import com.example.solutionchallenge.business.abstracts.IHomeworkService;
 import com.example.solutionchallenge.business.abstracts.IStudentService;
-import com.example.solutionchallenge.business.abstracts.IUserService;
 import com.example.solutionchallenge.business.tools.Messages;
 import com.example.solutionchallenge.core.utilities.business.BusinessRule;
 import com.example.solutionchallenge.core.utilities.results.*;
@@ -11,7 +10,6 @@ import com.example.solutionchallenge.entities.concretes.Student;
 import com.example.solutionchallenge.repo.abstracts.IHomeworkDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 
 import java.util.List;
 
@@ -64,6 +62,10 @@ public class HomeworkManager implements IHomeworkService {
         if (result)
             return new SuccesDataResult<>(iHomeworkDao.getById(id));
         return new ErrorDataResult<>(null);
+    }
+
+    public DataResult<List<Homework>> getAllByStudents(String username) {
+        return new SuccesDataResult<>(iHomeworkDao.getAllByStudents_Username(username));
     }
 
     private IResult isHomeworkExistById(int homeworkId) {

@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
@@ -36,8 +38,6 @@ public class Homework implements IEntity {
     private List<Student> students = new ArrayList<>();
 
 
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -45,6 +45,18 @@ public class Homework implements IEntity {
     @NotNull
     @NotBlank
     private String title;
+
+    @NotNull
+    @NotBlank
+    private int week;
+
+    @NotNull
+    @NotBlank
+    @Min(1)
+    @Max(3)
+    private int type; //   1 Mufredat, 2 Basit - Orta Odev, 3 Zor Odev
+
+
 
     @NotBlank
     @NotBlank

@@ -4,9 +4,13 @@ import com.example.solutionchallenge.business.abstracts.IStudentService;
 import com.example.solutionchallenge.business.tools.Messages;
 import com.example.solutionchallenge.core.utilities.business.BusinessRule;
 import com.example.solutionchallenge.core.utilities.results.*;
+import com.example.solutionchallenge.entities.concretes.Homework;
 import com.example.solutionchallenge.entities.concretes.Student;
+import com.example.solutionchallenge.entities.dtos.StudentDetailDto;
 import com.example.solutionchallenge.repo.abstracts.IStudentDao;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StudentManager implements IStudentService {
     private final IStudentDao iStudentDao;
+    private final PasswordEncoder passwordEncoder;
 
 
     @Override
@@ -31,6 +36,7 @@ public class StudentManager implements IStudentService {
         if (result != null)
             return result;
 
+        student.setPassword(passwordEncoder.encode(student.getPassword()));
         iStudentDao.save(student);
         return new SuccessResult(Messages.studentAdd);
     }
@@ -58,14 +64,21 @@ public class StudentManager implements IStudentService {
         return null;
     }
 
-    private IResult ifExistByUsername(String username){
+    @Override
+    public DataResult<StudentDetailDto> getStudentDetailDto(String username) {
+        return new SuccesDataResult<>(iStudentDao.getStudentDetailDto(username), Messages.studentListed);
+    }
+
+
+
+    private IResult ifExistByUsername(String username) {
         if (iStudentDao.existsByUsername(username))
             return new ErrorResult(Messages.usernameAlreadyInUse);
 
         return new SuccessResult();
     }
 
-    private IResult ifExistByEmail(String email){
+    private IResult ifExistByEmail(String email) {
         if (iStudentDao.existsByEmail(email))
             return new ErrorResult(Messages.emailAlreadyInUse);
         return new SuccessResult();

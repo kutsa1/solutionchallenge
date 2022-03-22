@@ -4,8 +4,8 @@ import com.example.solutionchallenge.business.abstracts.ISolutionService;
 import com.example.solutionchallenge.business.tools.Messages;
 import com.example.solutionchallenge.core.utilities.results.*;
 import com.example.solutionchallenge.entities.concretes.Solution;
+import com.example.solutionchallenge.entities.dtos.SolutionDetailDto;
 import com.example.solutionchallenge.repo.abstracts.ISolutionDao;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +41,7 @@ public class SolutionManager implements ISolutionService {
 
     @Override
     public DataResult<Solution> getById(Integer id) {
-        return new SuccesDataResult<>(iSolutionDao.getById(id),Messages.soluitonListed);
+        return new SuccesDataResult<>(iSolutionDao.getById(id), Messages.soluitonListed);
     }
 
     @Override
@@ -52,20 +52,10 @@ public class SolutionManager implements ISolutionService {
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    @Override
+    public DataResult<List<SolutionDetailDto>> getAllSolutionDetail() {
+        return new SuccesDataResult<>(this.iSolutionDao.getAllSolutionDetail());
+    }
 
 
 }
