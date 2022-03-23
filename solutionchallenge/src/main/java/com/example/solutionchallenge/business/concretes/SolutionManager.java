@@ -57,5 +57,10 @@ public class SolutionManager implements ISolutionService {
         return new SuccesDataResult<>(this.iSolutionDao.getAllSolutionDetail());
     }
 
+    @Override
+    public DataResult<List<SolutionDetailDto>> getSolutionDetailDtoByHomework(int homeworkId) {
+        return new SuccesDataResult<>(this.iSolutionDao.getSolutionDetailDtoByHomework(homeworkId));
+    }
+
 
 }

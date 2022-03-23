@@ -14,4 +14,7 @@ public interface ISolutionDao extends JpaRepository<Solution, Integer> {
 
     @Query("select new com.example.solutionchallenge.entities.dtos.SolutionDetailDto(s.id,s.description,std.name,std.lastName,s.date,h.id) from Solution s inner join s.student std inner join s.homework h")
     List<SolutionDetailDto> getAllSolutionDetail();
+
+    @Query("select new com.example.solutionchallenge.entities.dtos.SolutionDetailDto(s.id,s.description,std.name, std.lastName,s.date,h.id) from Solution s inner join s.student std inner join s.homework h where h.id=:homeworkId")
+    List<SolutionDetailDto> getSolutionDetailDtoByHomework(int homeworkId);
 }
