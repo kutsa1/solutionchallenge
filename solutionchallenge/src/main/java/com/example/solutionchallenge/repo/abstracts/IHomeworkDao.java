@@ -14,6 +14,6 @@ public interface IHomeworkDao extends JpaRepository<Homework, Integer> {
 
     List<Homework> getAllByStudents_Username(String username);
 
-    @Query("select new com.example.solutionchallenge.entities.dtos.SolutionDetailDto(s.id,s.description,std.name, std.lastName,s.date,h.id) from Solution s inner join std inner join s.homework h where h.id=homeworkId")
-    SolutionDetailDto getSolutionDetailDto(int homeworkId);
+
+
 }

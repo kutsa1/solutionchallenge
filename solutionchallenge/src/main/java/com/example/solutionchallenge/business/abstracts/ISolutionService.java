@@ -13,4 +13,5 @@ public interface ISolutionService extends IServiceBase<Solution> {
     IResult existBySolutionId(int solutionId);
 
     DataResult<List<SolutionDetailDto>> getAllSolutionDetail();
+    DataResult<List<SolutionDetailDto>> getSolutionDetailDtoByHomework(int homeworkId);
 }
