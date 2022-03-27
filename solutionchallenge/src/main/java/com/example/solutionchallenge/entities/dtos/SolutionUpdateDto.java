@@ -8,15 +8,13 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class SolutionDetailDto {
+@NoArgsConstructor
+public class SolutionUpdateDto {
     private int id;
-    private String description;
-    private int studentId;
-    private String studentUsername;
-    private String studentName;
-    private String studentLastName;
-    private Date date;
     private int homeworkId;
+    private int studentId;
+    private Date date;
+    private String description;
+
 }

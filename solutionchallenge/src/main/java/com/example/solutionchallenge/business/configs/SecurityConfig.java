@@ -37,7 +37,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/swagger-resources/**",
                 "/configuration/security",
                 "/swagger-ui.html",
-                "/webjars/**");
+                "/webjars/**",
+                "/api/register/**");
     }
 
     @Override
@@ -49,15 +50,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeRequests().antMatchers("/api/login/**").permitAll();
-        http.authorizeRequests().antMatchers(GET, "/api/users/getall/**").hasAnyAuthority(Roles.ADMIN).and().exceptionHandling().accessDeniedHandler(accessDeniedHandler());
-        http.authorizeRequests().antMatchers(POST, "/api/users/save/**").hasAnyAuthority(Roles.ADMIN).and().exceptionHandling().accessDeniedHandler(accessDeniedHandler());
-        http.authorizeRequests().antMatchers(POST, "/api/persons/add/**").hasAnyAuthority(Roles.ADMIN).and().exceptionHandling().accessDeniedHandler(accessDeniedHandler());
-        http.authorizeRequests().antMatchers(POST, "/api/users/addroletouser/**").hasAnyAuthority(Roles.ADMIN).and().exceptionHandling().accessDeniedHandler(accessDeniedHandler());
-        http.authorizeRequests().antMatchers(POST, "/api/users/getuserdetail/**").hasAnyAuthority(Roles.ADMIN).and().exceptionHandling().accessDeniedHandler(accessDeniedHandler());
+        http.authorizeRequests().antMatchers(GET, "/api/users/getall/**").permitAll();
+        http.authorizeRequests().antMatchers(POST, "/api/users/save/**").hasAnyAuthority("admin").and().exceptionHandling().accessDeniedHandler(accessDeniedHandler());
+        http.authorizeRequests().antMatchers(POST, "/api/persons/add/**").hasAnyAuthority("admin").and().exceptionHandling().accessDeniedHandler(accessDeniedHandler());
+        http.authorizeRequests().antMatchers(POST, "/api/users/addroletouser/**").hasAnyAuthority("admin").and().exceptionHandling().accessDeniedHandler(accessDeniedHandler());
+        http.authorizeRequests().antMatchers(POST, "/api/users/getuserdetail/**").hasAnyAuthority("admin").and().exceptionHandling().accessDeniedHandler(accessDeniedHandler());
         http.authorizeRequests().antMatchers(POST, "/api/reports/getallreportdetail/**").hasAnyAuthority().and().exceptionHandling().accessDeniedHandler(accessDeniedHandler());
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(customAuthenticationFilter);
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+
     }
 
 

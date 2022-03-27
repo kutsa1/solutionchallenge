@@ -3,14 +3,13 @@ package com.example.solutionchallenge.business.concretes;
 import com.example.solutionchallenge.business.abstracts.IRoleService;
 import com.example.solutionchallenge.business.abstracts.IUserService;
 import com.example.solutionchallenge.business.tools.Messages;
-import com.example.solutionchallenge.core.utilities.business.BusinessRule;
-import com.example.solutionchallenge.core.utilities.results.*;
 import com.example.solutionchallenge.core.entities.Role;
 import com.example.solutionchallenge.core.entities.User;
+import com.example.solutionchallenge.core.utilities.business.BusinessRule;
+import com.example.solutionchallenge.core.utilities.results.*;
 import com.example.solutionchallenge.repo.abstracts.IUserDao;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -135,6 +134,19 @@ public class UserManager implements IUserService, UserDetailsService {
         return new ErrorResult();
     }
 
+    @Override
+    public IResult passwordReset(String password, String username) {
+        var user = iUserDao.findByUsername(username);
+//        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
+//        var isAuth = authenticationManager.authenticate(authenticationToken).isAuthenticated();
+        if (user == null)
+            return new ErrorResult(Messages.userNotFound);
+
+        user.setPassword(passwordEncoder.encode(password));
+        iUserDao.save(user);
+        return new SuccesDataResult<>(Messages.passwordChangedSuccessfully);
+    }
+
 
     private IResult ifAlreadyExistByUsername(String username) {
         if (iUserDao.existsByUsername(username))
@@ -194,7 +206,7 @@ public class UserManager implements IUserService, UserDetailsService {
     }
 
     private IResult isUpdateableWithEmail(String email, int id) {
-        
+
         var result = iUserDao.findByEmailAndIdNot(email, id);
         if (result != null)
             return new ErrorResult(Messages.emailAlreadyInUse);
@@ -202,8 +214,6 @@ public class UserManager implements IUserService, UserDetailsService {
 
 
     }
-
-
 
 
 }

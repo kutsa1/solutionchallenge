@@ -42,15 +42,16 @@ public final class Messages {
     public static String userListed = "User is listed";
     public static String userSave = "User is saved successfuly";
     public static String userUpdate = "User is update.";
-    public static String usernameAlreadyInUse = "Username is already in use";
-    public static String emailAlreadyInUse = "Email is alerady in use";
+    public static String usernameAlreadyInUse = "USERNAME_IN_USE";
+    public static String emailAlreadyInUse = "EMAIL_IN_USE";
     public static String imageUploadError = "Image Upload Error";
     public static String imageCanNotBeNull = "Image can not be null";
     public static String imageSizeUnValid = "Image size bigger than should be";
-    public static String photoSaved = "Image is saved by succesfuly";
+    public static String photoSaved = "Image is saved by successfully";
     public static String photoListed = "Images are listed";
     public static String photoUpdate = "Image is updated";
     public static String photoDeleted = "Image is deleted";
     public static String photoNotFound = "Image can not found";
     public static String photoAddedToSolution = "Photo is added the solution By KUTSAL GÜRLEK";
+    public static String passwordChangedSuccessfully = "PASSWORD_CHANGED";
 }

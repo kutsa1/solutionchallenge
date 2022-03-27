@@ -13,4 +13,6 @@ public interface IUserService extends IServiceBase<User> {
     DataResult<User> getById(Integer id);
 
     IResult existsById(int userId);
+
+    IResult passwordReset(String password,String username);
 }

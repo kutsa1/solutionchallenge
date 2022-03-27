@@ -29,7 +29,9 @@ public class Comment implements IEntity {
 
 
     @ManyToOne
-    private User user;
+    @NotBlank
+    @NotNull
+    private Student student;
 
     private boolean status = true;
     private LocalDateTime date = LocalDateTime.now();
@@ -40,6 +42,8 @@ public class Comment implements IEntity {
     private Solution solution;
 
     @ManyToOne
+    @NotBlank
+    @NotNull
     private Homework homework;
 
     @NotNull

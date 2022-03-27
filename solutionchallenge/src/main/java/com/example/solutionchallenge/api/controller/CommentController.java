@@ -6,10 +6,7 @@ import com.example.solutionchallenge.core.utilities.results.ErrorResult;
 import com.example.solutionchallenge.entities.concretes.Comment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/comments")
@@ -17,7 +14,7 @@ public class CommentController extends ControllerBase<Comment, ICommentService> 
 
     ICommentService iCommentService;
 
-    public CommentController(ICommentService iCommentService){
+    public CommentController(ICommentService iCommentService) {
         super(iCommentService);
         this.iCommentService = iCommentService;
     }
@@ -32,21 +29,29 @@ public class CommentController extends ControllerBase<Comment, ICommentService> 
 //     }
 
     @PostMapping("/addcommenttosolution")
-    ResponseEntity<?> addCommentToSolution(@RequestParam int commentId, int solutionId){
-        var result = iCommentService.addCommentToSolution(commentId,solutionId);
-        if (result.isSuccess()){
+    ResponseEntity<?> addCommentToSolution(@RequestParam int commentId, int solutionId) {
+        var result = iCommentService.addCommentToSolution(commentId, solutionId);
+        if (result.isSuccess()) {
             return new ResponseEntity<>(result, HttpStatus.OK);
         }
         return new ResponseEntity<>(new ErrorResult(result.getMessage()), HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping("/addcommenttouser")
-    ResponseEntity<?> addCommentToUser(@RequestParam int commentId, int userId){
+    ResponseEntity<?> addCommentToUser(@RequestParam int commentId, int userId) {
         var result = iCommentService.addCommentToUser(commentId, userId);
-        if (result.isSuccess()){
+        if (result.isSuccess()) {
             return new ResponseEntity<>(result, HttpStatus.OK);
         }
         return new ResponseEntity<>(new ErrorResult(result.getMessage()), HttpStatus.BAD_REQUEST);
 
+    }
+
+    @GetMapping("/getcommentdetaildtobyhomework")
+    ResponseEntity<?> getAllCommentDtoByHomeworkId(@RequestParam int homeworkId) {
+        var result = iCommentService.getAllCommentDtoByHomeworkId(homeworkId);
+        if (result.isSuccess())
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        return new ResponseEntity<>(new ErrorResult(result.getMessage()), HttpStatus.BAD_REQUEST);
     }
 }

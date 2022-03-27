@@ -10,13 +10,15 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SolutionDetailDto {
+public class CommentDetailDto {
     private int id;
-    private String description;
     private int studentId;
-    private String studentUsername;
-    private String studentName;
-    private String studentLastName;
-    private Date date;
     private int homeworkId;
+    private int solutionId;
+    private String userFirstName;
+    private String userLastName;
+    private String userUsername;
+    private String text;
+    private LocalDateTime date;
+
 }

@@ -5,12 +5,13 @@ import com.example.solutionchallenge.core.utilities.results.DataResult;
 import com.example.solutionchallenge.core.utilities.results.IResult;
 import com.example.solutionchallenge.entities.concretes.Student;
 import com.example.solutionchallenge.entities.dtos.StudentDetailDto;
-
-import java.util.List;
+import com.example.solutionchallenge.entities.dtos.StudentEditDto;
 
 public interface IStudentService extends IServiceBase<Student> {
     DataResult<Student> getById(Integer id);
     IResult existById(int studentId);
     DataResult<StudentDetailDto> getStudentDetailDto(String username);
+    DataResult<StudentEditDto> getStudentDtoByUsername(String username);
+
 
 }
