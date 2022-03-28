@@ -6,18 +6,16 @@ import com.example.solutionchallenge.business.tools.Messages;
 import com.example.solutionchallenge.core.entities.PasswordResetToken;
 import com.example.solutionchallenge.core.entities.User;
 import com.example.solutionchallenge.core.utilities.business.BusinessRule;
-import com.example.solutionchallenge.core.utilities.results.DataResult;
 import com.example.solutionchallenge.core.utilities.results.ErrorResult;
 import com.example.solutionchallenge.core.utilities.results.IResult;
 import com.example.solutionchallenge.core.utilities.results.SuccessResult;
 import com.example.solutionchallenge.repo.abstracts.IResetTokenDao;
 import lombok.RequiredArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -25,6 +23,8 @@ import java.util.UUID;
 public class PasswordResetTokenManager implements IResetTokenService {
     private final IUserService iUserService;
     private final IResetTokenDao iResetTokenDao;
+    private final JavaMailSender javaMailSender;
+
 
 
     private IResult isExistUserByEmail(String userEmail) {
@@ -62,7 +62,20 @@ public class PasswordResetTokenManager implements IResetTokenService {
         myToken.setStatus(true);
         myToken.setUser(user);
         iResetTokenDao.save(myToken);
+        String subject = "Şifre Değişikliliği Hakkında";
+        String body = "https://localhost:4200/reset-password/" + token;
+
+        sendEmail(email,subject,body);
         return new SuccessResult(myToken.getToken());
+    }
+    private void sendEmail(String toEmail, String subject, String body) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("kutsalgurlek99@gmail.com");
+        message.setTo(toEmail);
+        message.setText(body);
+        message.setSubject(subject);
+
+        javaMailSender.send(message);
     }
 
 
