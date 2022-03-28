@@ -3,6 +3,7 @@ package com.example.solutionchallenge.business.concretes;
 import com.example.solutionchallenge.business.abstracts.IRoleService;
 import com.example.solutionchallenge.business.abstracts.IUserService;
 import com.example.solutionchallenge.business.tools.Messages;
+import com.example.solutionchallenge.core.entities.PasswordResetToken;
 import com.example.solutionchallenge.core.entities.Role;
 import com.example.solutionchallenge.core.entities.User;
 import com.example.solutionchallenge.core.utilities.business.BusinessRule;
@@ -135,6 +136,14 @@ public class UserManager implements IUserService, UserDetailsService {
     }
 
     @Override
+    public IResult existsByEmail(String userEmail) {
+        var result = iUserDao.existsByEmail(userEmail);
+        if (result)
+            return new SuccessResult();
+        return new ErrorResult(Messages.userNotFoundByEmail);
+    }
+
+    @Override
     public IResult passwordReset(String password, String username) {
         var user = iUserDao.findByUsername(username);
 //        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
@@ -145,6 +154,18 @@ public class UserManager implements IUserService, UserDetailsService {
         user.setPassword(passwordEncoder.encode(password));
         iUserDao.save(user);
         return new SuccesDataResult<>(Messages.passwordChangedSuccessfully);
+    }
+
+    @Override
+    public DataResult<User> getUserByEmail(String email) {
+        return new SuccesDataResult<>(iUserDao.getByEmail(email),Messages.userListed);
+    }
+
+    @Override
+    public void createPasswordResetTokenForUser(User user, String token) {
+        PasswordResetToken myToken = new PasswordResetToken();
+        iUserDao.save(user);
+
     }
 
 
