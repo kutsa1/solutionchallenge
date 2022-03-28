@@ -4,11 +4,10 @@ import com.example.solutionchallenge.business.abstracts.IStudentService;
 import com.example.solutionchallenge.business.tools.Messages;
 import com.example.solutionchallenge.core.utilities.business.BusinessRule;
 import com.example.solutionchallenge.core.utilities.results.*;
-import com.example.solutionchallenge.entities.concretes.Homework;
 import com.example.solutionchallenge.entities.concretes.Student;
 import com.example.solutionchallenge.entities.dtos.StudentDetailDto;
+import com.example.solutionchallenge.entities.dtos.StudentEditDto;
 import com.example.solutionchallenge.repo.abstracts.IStudentDao;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -69,6 +68,10 @@ public class StudentManager implements IStudentService {
         return new SuccesDataResult<>(iStudentDao.getStudentDetailDto(username), Messages.studentListed);
     }
 
+    @Override
+    public DataResult<StudentEditDto> getStudentDtoByUsername(String username) {
+        return new SuccesDataResult<>(iStudentDao.getStudentDtoByUsername(username));
+    }
 
 
     private IResult ifExistByUsername(String username) {

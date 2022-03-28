@@ -7,6 +7,7 @@ import com.example.solutionchallenge.core.utilities.results.SuccesDataResult;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.weaver.NewConstructorTypeMunger;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -36,6 +37,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
@@ -45,7 +47,6 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException, ServletException {
-
         User user = (User) authentication.getPrincipal();
         Algorithm algorithm = Algorithm.HMAC256(SECRET_KEY.getBytes());
         String access_token = JWT.create()

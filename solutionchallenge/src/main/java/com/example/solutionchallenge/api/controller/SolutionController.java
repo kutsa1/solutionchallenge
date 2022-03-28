@@ -31,10 +31,20 @@ public class SolutionController extends ControllerBase<Solution, ISolutionServic
     }
 
     @GetMapping("/getallsolutionbyhomework")
-    ResponseEntity<?> getAllSolutionDetailByHomework(@RequestParam int homeworkId){
+    ResponseEntity<?> getAllSolutionDetailByHomework(@RequestParam int homeworkId) {
         var result = iSolutionService.getSolutionDetailDtoByHomework(homeworkId);
         if (result.isSuccess())
             return new ResponseEntity<>(result, HttpStatus.OK);
         return new ResponseEntity<>(new ErrorResult(result.getMessage()), HttpStatus.BAD_REQUEST);
     }
+
+    @GetMapping("/getsolutionupdatedtobyid")
+    ResponseEntity<?> getSolutionUpdateDtoById(@RequestParam int solutionId) {
+        var result = iSolutionService.getSolutionUpdateDtoById(solutionId);
+        if (result.isSuccess())
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        return new ResponseEntity<>(new ErrorResult(result.getMessage()), HttpStatus.BAD_REQUEST);
+    }
+
+
 }

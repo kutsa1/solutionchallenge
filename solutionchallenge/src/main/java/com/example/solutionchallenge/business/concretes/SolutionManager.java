@@ -5,6 +5,7 @@ import com.example.solutionchallenge.business.tools.Messages;
 import com.example.solutionchallenge.core.utilities.results.*;
 import com.example.solutionchallenge.entities.concretes.Solution;
 import com.example.solutionchallenge.entities.dtos.SolutionDetailDto;
+import com.example.solutionchallenge.entities.dtos.SolutionUpdateDto;
 import com.example.solutionchallenge.repo.abstracts.ISolutionDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -59,7 +60,12 @@ public class SolutionManager implements ISolutionService {
 
     @Override
     public DataResult<List<SolutionDetailDto>> getSolutionDetailDtoByHomework(int homeworkId) {
-        return new SuccesDataResult<>(this.iSolutionDao.getSolutionDetailDtoByHomework(homeworkId));
+        return new SuccesDataResult<>(this.iSolutionDao.getSolutionDetailDtoByHomework(homeworkId), Messages.soluitonListed);
+    }
+
+    @Override
+    public DataResult<SolutionUpdateDto> getSolutionUpdateDtoById(int solutionId) {
+        return new SuccesDataResult<>(iSolutionDao.getSolutionUpdateDtoById(solutionId), Messages.soluitonListed);
     }
 
 

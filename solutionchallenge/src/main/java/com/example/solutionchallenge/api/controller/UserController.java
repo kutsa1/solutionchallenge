@@ -3,6 +3,8 @@ package com.example.solutionchallenge.api.controller;
 import com.example.solutionchallenge.business.abstracts.IUserService;
 import com.example.solutionchallenge.core.api.ControllerBase;
 import com.example.solutionchallenge.core.entities.User;
+import com.example.solutionchallenge.core.utilities.results.ErrorResult;
+import com.example.solutionchallenge.core.utilities.results.IResult;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("api/users")
 public class
-UserController extends ControllerBase<User,IUserService> {
+UserController extends ControllerBase<User, IUserService> {
 
     private final IUserService iUserService;
 
@@ -24,10 +26,10 @@ UserController extends ControllerBase<User,IUserService> {
 
 
     @PostMapping("/addroletouser")
-    public ResponseEntity<?> addRoleToUser(@RequestParam String username, @RequestParam String roleName) {
+    public ResponseEntity<IResult> addRoleToUser(@RequestParam String username, @RequestParam String roleName) {
         var result = iUserService.addRoleToUser(username, roleName);
         if (result.isSuccess())
             return new ResponseEntity<>(result, HttpStatus.OK);
-        return new ResponseEntity<>(result.getMessage(), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new ErrorResult(result.getMessage()), HttpStatus.BAD_REQUEST);
     }
 }
