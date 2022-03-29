@@ -1,5 +1,6 @@
 package com.example.solutionchallenge.api.controller;
 
+import com.example.solutionchallenge.business.abstracts.IResetTokenService;
 import com.example.solutionchallenge.business.abstracts.IStudentService;
 import com.example.solutionchallenge.business.abstracts.IUserService;
 import com.example.solutionchallenge.core.utilities.results.ErrorResult;
@@ -17,6 +18,7 @@ import javax.validation.Valid;
 public class AuthController {
     private final IStudentService iStudentService;
     private final IUserService iUserService;
+    private final IResetTokenService iResetTokenService;
 
     @PostMapping("/register")
     ResponseEntity<?> register(@Valid @RequestBody Student student) {
@@ -30,6 +32,14 @@ public class AuthController {
     @PutMapping("/passwordreset")
     ResponseEntity<?> passwordReset(@RequestParam String password, @RequestParam String username) {
         var result = iUserService.passwordReset(password, username);
+        if (result.isSuccess())
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        return new ResponseEntity<>(new ErrorResult(result.getMessage()), HttpStatus.BAD_REQUEST);
+    }
+
+    @PostMapping("/passwordresetbyemail")
+    ResponseEntity<?> passwordResetByEmail(@RequestParam String email){
+        var result = iResetTokenService.sendPasswordResetLink(email);
         if (result.isSuccess())
             return new ResponseEntity<>(result, HttpStatus.OK);
         return new ResponseEntity<>(new ErrorResult(result.getMessage()), HttpStatus.BAD_REQUEST);
