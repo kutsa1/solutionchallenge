@@ -17,6 +17,7 @@ public interface IStudentDao extends JpaRepository<Student, Integer> {
 
     boolean existsByEmail(String email);
 
+
     @Query("select new com.example.solutionchallenge.entities.dtos.StudentDetailDto(s.id,s.name,s.lastName) from Student s where s.username=:username")
     StudentDetailDto getStudentDetailDto(String username);
 

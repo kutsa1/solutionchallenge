@@ -14,11 +14,4 @@ public interface IUserService extends IServiceBase<User> {
 
     IResult existsById(int userId);
 
-    IResult existsByEmail(String userEmail);
-
-    IResult passwordReset(String password,String username);
-
-    DataResult<User> getUserByEmail(String email);
-
-    void createPasswordResetTokenForUser(User user, String token);
 }
