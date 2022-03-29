@@ -21,10 +21,10 @@ public class SolutionChallengeApplication {
 
     }
 
-//    @Bean
-//    PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 //
 //	    @Bean
 //		CommandLineRunner run(IUserService userService, IRoleService roleService) {
