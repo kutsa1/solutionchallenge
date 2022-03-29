@@ -10,6 +10,8 @@ import com.example.solutionchallenge.core.utilities.results.*;
 import com.example.solutionchallenge.repo.abstracts.IUserDao;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -28,7 +30,6 @@ public class UserManager implements IUserService, UserDetailsService {
     private final IUserDao iUserDao;
     private final IRoleService iRoleService;
     private final PasswordEncoder passwordEncoder;
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -134,18 +135,6 @@ public class UserManager implements IUserService, UserDetailsService {
         return new ErrorResult();
     }
 
-    @Override
-    public IResult passwordReset(String password, String username) {
-        var user = iUserDao.findByUsername(username);
-//        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
-//        var isAuth = authenticationManager.authenticate(authenticationToken).isAuthenticated();
-        if (user == null)
-            return new ErrorResult(Messages.userNotFound);
-
-        user.setPassword(passwordEncoder.encode(password));
-        iUserDao.save(user);
-        return new SuccesDataResult<>(Messages.passwordChangedSuccessfully);
-    }
 
 
     private IResult ifAlreadyExistByUsername(String username) {
