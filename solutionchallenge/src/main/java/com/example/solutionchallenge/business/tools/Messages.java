@@ -54,4 +54,6 @@ public final class Messages {
     public static String photoNotFound = "Image can not found";
     public static String photoAddedToSolution = "Photo is added the solution By KUTSAL GÜRLEK";
     public static String passwordChangedSuccessfully = "PASSWORD_CHANGED";
+    public static String userNotFoundByEmail = "User is not found By email";
+    public static String tokenNotFound = "Token is not found";
 }

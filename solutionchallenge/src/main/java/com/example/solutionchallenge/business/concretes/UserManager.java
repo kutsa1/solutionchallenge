@@ -3,6 +3,7 @@ package com.example.solutionchallenge.business.concretes;
 import com.example.solutionchallenge.business.abstracts.IRoleService;
 import com.example.solutionchallenge.business.abstracts.IUserService;
 import com.example.solutionchallenge.business.tools.Messages;
+import com.example.solutionchallenge.core.entities.PasswordResetToken;
 import com.example.solutionchallenge.core.entities.Role;
 import com.example.solutionchallenge.core.entities.User;
 import com.example.solutionchallenge.core.utilities.business.BusinessRule;
@@ -135,6 +136,18 @@ public class UserManager implements IUserService, UserDetailsService {
         return new ErrorResult();
     }
 
+
+    @Override
+    public DataResult<User> getUserByEmail(String email) {
+        return new SuccesDataResult<>(iUserDao.getByEmail(email),Messages.userListed);
+    }
+
+    @Override
+    public void createPasswordResetTokenForUser(User user, String token) {
+        PasswordResetToken myToken = new PasswordResetToken();
+        iUserDao.save(user);
+
+    }
 
 
     private IResult ifAlreadyExistByUsername(String username) {
