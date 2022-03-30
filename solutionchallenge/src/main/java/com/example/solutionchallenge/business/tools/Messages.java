@@ -18,16 +18,16 @@ public final class Messages {
     public static String homeworkSave = "Homework is saved.";
     public static String homeworkUpdate = "Homework is updated.";
     public static String homeworkDelete = "Homework is deleted.";
-    public static String homeworkAddedToUser ="Homework is added to user.";
-    public static String roleNotFound ="There is no role like this.";
+    public static String homeworkAddedToUser = "Homework is added to user.";
+    public static String roleNotFound = "There is no role like this.";
     public static String roleNameAlreadyExist = "Role name is already exist.";
-    public static String roleAdded ="Role is added.";
+    public static String roleAdded = "Role is added.";
     public static String roleUpdated = "Role is updated.";
-    public static String roleDeleted ="Role is deleted.";
+    public static String roleDeleted = "Role is deleted.";
     public static String roleListed = "Role is listed.";
     public static String solutionsListed = "Solutions are listed";
     public static String solutionAdd = "Solution is added.";
-    public static String solutionUpdate ="Solution is updated.";
+    public static String solutionUpdate = "Solution is updated.";
     public static String solutionDelete = "Solution is deleted";
     public static String soluitonListed = "Solution is listed by id";
     public static String solutionNotFound = "Soluiton is not found";
@@ -56,4 +56,5 @@ public final class Messages {
     public static String passwordChangedSuccessfully = "PASSWORD_CHANGED";
     public static String userNotFoundByEmail = "User is not found By email";
     public static String tokenNotFound = "Token is not found";
+    public static String tokenNotValid = "TOKEN_NOT_VALID";
 }

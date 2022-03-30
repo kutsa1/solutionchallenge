@@ -5,16 +5,18 @@ import com.example.solutionchallenge.business.abstracts.IUserService;
 import com.example.solutionchallenge.business.tools.Messages;
 import com.example.solutionchallenge.core.entities.PasswordResetToken;
 import com.example.solutionchallenge.core.entities.User;
+import com.example.solutionchallenge.core.utilities.IEmailService;
+import com.example.solutionchallenge.core.utilities.Mail;
 import com.example.solutionchallenge.core.utilities.business.BusinessRule;
 import com.example.solutionchallenge.core.utilities.results.ErrorResult;
 import com.example.solutionchallenge.core.utilities.results.IResult;
 import com.example.solutionchallenge.core.utilities.results.SuccessResult;
 import com.example.solutionchallenge.repo.abstracts.IResetTokenDao;
 import lombok.RequiredArgsConstructor;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.util.Date;
 import java.util.UUID;
 
@@ -23,8 +25,14 @@ import java.util.UUID;
 public class PasswordResetTokenManager implements IResetTokenService {
     private final IUserService iUserService;
     private final IResetTokenDao iResetTokenDao;
-    private final JavaMailSender javaMailSender;
+    private final IEmailService iEmailService;
 
+
+    @Value("${reset.token.expire}")
+    private String resetPasswordTokenExpireDate;
+
+    @Value("${reset.password.link}")
+    private String resetPasswordLink;
 
 
     private IResult isExistUserByEmail(String userEmail) {
@@ -42,40 +50,30 @@ public class PasswordResetTokenManager implements IResetTokenService {
     }
 
     @Override
-    public IResult sendPasswordResetLink(String email) {
+    public IResult sendPasswordResetLink(String email) throws MessagingException {
 
-        var result = BusinessRule.run(isExistUserByEmail(email)
-        );
+        var result = BusinessRule.run(isExistUserByEmail(email));
         if (result != null)
             return result;
         String token;
-        while (true) {
+        do {
             token = UUID.randomUUID().toString();
-            if (!isExistToken(token).isSuccess())
-                break;
 
-        }
+        } while (isExistToken(token).isSuccess());
+
+
         User user = iUserService.getUserByEmail(email).getData();
         PasswordResetToken myToken = new PasswordResetToken();
         myToken.setToken(token);
-        myToken.setExpiryDate(new Date(System.currentTimeMillis()+3600000));
+        myToken.setExpiryDate(new Date(System.currentTimeMillis() + Long.parseLong(resetPasswordTokenExpireDate)));
         myToken.setStatus(true);
         myToken.setUser(user);
         iResetTokenDao.save(myToken);
-        String subject = "Şifre Değişikliliği Hakkında";
-        String body = "https://localhost:4200/reset-password/" + token;
+        String subject = "Şifre Değişikliği Hakkında";
+        String body = Mail.mail(user.getUsername(), resetPasswordLink + token);
 
-        sendEmail(email,subject,body);
+        iEmailService.sendEmail(email, subject, body);
         return new SuccessResult(myToken.getToken());
-    }
-    private void sendEmail(String toEmail, String subject, String body) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("kutsalgurlek99@gmail.com");
-        message.setTo(toEmail);
-        message.setText(body);
-        message.setSubject(subject);
-
-        javaMailSender.send(message);
     }
 
 

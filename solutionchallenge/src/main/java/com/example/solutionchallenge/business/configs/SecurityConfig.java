@@ -38,7 +38,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/configuration/security",
                 "/swagger-ui.html",
                 "/webjars/**",
-                "/api/register/**");
+                "/api/register/**",
+                "/api/passwordresetbyemail/**",
+                "/api/istokenvalid/**",
+                "/api/passwordresetbytoken/**");
     }
 
     @Override

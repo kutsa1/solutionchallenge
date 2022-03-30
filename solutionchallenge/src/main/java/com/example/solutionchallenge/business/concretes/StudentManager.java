@@ -8,6 +8,7 @@ import com.example.solutionchallenge.entities.concretes.Student;
 import com.example.solutionchallenge.entities.dtos.StudentDetailDto;
 import com.example.solutionchallenge.entities.dtos.StudentEditDto;
 import com.example.solutionchallenge.repo.abstracts.IStudentDao;
+import com.example.solutionchallenge.repo.abstracts.IUserDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import java.util.List;
 public class StudentManager implements IStudentService {
     private final IStudentDao iStudentDao;
     private final PasswordEncoder passwordEncoder;
+    private final IUserDao iUserDao;
 
 
     @Override
@@ -42,7 +44,20 @@ public class StudentManager implements IStudentService {
 
     @Override
     public IResult update(Student student) {
-        iStudentDao.save(student);
+        var result = BusinessRule.run(
+                ifExistByEmailIdNot(student.getUsername(), student.getId()),
+                ifExistByUsernameIdNot(student.getUsername(), student.getId())
+
+        );
+        if (result != null)
+            return result;
+
+        var std = iStudentDao.getById(student.getId());
+        std.setName(student.getName());
+        std.setLastName(student.getLastName());
+        std.setEmail(student.getEmail());
+        std.setUsername(student.getUsername());
+        iStudentDao.save(std);
         return new SuccessResult(Messages.studentUpdate);
     }
 
@@ -75,15 +90,27 @@ public class StudentManager implements IStudentService {
 
 
     private IResult ifExistByUsername(String username) {
-        if (iStudentDao.existsByUsername(username))
+        if (iUserDao.existsByUsername(username))
             return new ErrorResult(Messages.usernameAlreadyInUse);
 
         return new SuccessResult();
     }
 
     private IResult ifExistByEmail(String email) {
-        if (iStudentDao.existsByEmail(email))
+        if (iUserDao.existsByEmail(email))
             return new ErrorResult(Messages.emailAlreadyInUse);
+        return new SuccessResult();
+    }
+
+    private IResult ifExistByEmailIdNot(String email, int id) {
+        if (iUserDao.findByEmailAndIdNot(email, id) != null )
+            return new ErrorResult(Messages.emailAlreadyInUse);
+        return new SuccessResult();
+    }
+
+    private IResult ifExistByUsernameIdNot(String username, int id) {
+        if (iUserDao.findByUsernameAndIdNot(username, id)!=null)
+            return new ErrorResult(Messages.usernameAlreadyInUse);
         return new SuccessResult();
     }
 }

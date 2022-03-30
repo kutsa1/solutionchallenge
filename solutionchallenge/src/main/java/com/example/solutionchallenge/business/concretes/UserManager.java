@@ -3,7 +3,6 @@ package com.example.solutionchallenge.business.concretes;
 import com.example.solutionchallenge.business.abstracts.IRoleService;
 import com.example.solutionchallenge.business.abstracts.IUserService;
 import com.example.solutionchallenge.business.tools.Messages;
-import com.example.solutionchallenge.core.entities.PasswordResetToken;
 import com.example.solutionchallenge.core.entities.Role;
 import com.example.solutionchallenge.core.entities.User;
 import com.example.solutionchallenge.core.utilities.business.BusinessRule;
@@ -11,8 +10,6 @@ import com.example.solutionchallenge.core.utilities.results.*;
 import com.example.solutionchallenge.repo.abstracts.IUserDao;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -139,14 +136,15 @@ public class UserManager implements IUserService, UserDetailsService {
 
     @Override
     public DataResult<User> getUserByEmail(String email) {
-        return new SuccesDataResult<>(iUserDao.getByEmail(email),Messages.userListed);
+        return new SuccesDataResult<>(iUserDao.getByEmail(email), Messages.userListed);
     }
 
     @Override
-    public void createPasswordResetTokenForUser(User user, String token) {
-        PasswordResetToken myToken = new PasswordResetToken();
-        iUserDao.save(user);
-
+    public IResult existsByEmail(String email) {
+        var user = iUserDao.getByEmail(email);
+        if (user != null)
+            return new SuccessResult();
+        return new ErrorResult(Messages.userNotFound);
     }
 
 

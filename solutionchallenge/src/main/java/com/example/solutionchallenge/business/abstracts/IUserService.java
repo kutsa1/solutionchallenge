@@ -14,4 +14,7 @@ public interface IUserService extends IServiceBase<User> {
 
     IResult existsById(int userId);
 
+    DataResult<User> getUserByEmail(String email);
+
+    IResult existsByEmail(String email);
 }
